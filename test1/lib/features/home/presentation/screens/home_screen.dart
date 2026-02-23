@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:test1/features/home/presentation/widgets/pickup_widget.dart';
+import 'package:test1/features/home/presentation/widgets/appbar_card.dart';
 import 'package:test1/features/landing/presentation/controllers/landing_controller_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -17,11 +16,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     Future.microtask(() {
       final token = ref.read(landingControllerProvider).token;
       if (mounted) {
-       
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.green,
-            content: Text(token.isEmpty?"dfdskfj":token, style: TextStyle(color: Colors.white)),
+            content: Text(token.isEmpty ? "dfdskfj" : token, style: TextStyle(color: Colors.white)),
           ),
         );
       }
@@ -32,63 +30,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        leading: Icon(Icons.menu, color: Colors.white),
+        title: Text("Let's Ride", style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [ Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(radius: 18, backgroundColor: Colors.grey),
+        )],
+        bottom: AppbarCard(),
+      ),
       body: Column(
         children: [
-          Container(
-            color: Colors.black,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: .spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.menu, color: Colors.white),
-                      ),
-                      Text(
-                        "Let's Ride",
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                      ),
-                      CircleAvatar(radius: 12, backgroundColor: Colors.grey),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisAlignment: .spaceBetween,
-                      children: [
-                        Column(
-                          spacing: 10,
-                          crossAxisAlignment: .start,
-                          children: [
-                            PickUpWidget(
-                              leading: 'A',
-                              subTitle: "Pickup",
-                              title: "150 Street New York, USA",
-                            ),
-                            PickUpWidget(
-                              leading: 'B',
-                              subTitle: "Drop Off",
-                              title: "30 Street Boston, USA",
-                            ),
-                          ],
-                        ),
-                        Icon(Icons.swap_vert, color: Colors.grey),
-                      ],
-                    ),
-                  ),
-                  Container(width: double.infinity, color: Colors.grey),
-                ],
-              ),
-            ),
-          ),
+          // Container(
+          //   color: Colors.black,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Column(
+          //       children: [
+          //         Row(
+          //           mainAxisAlignment: .spaceBetween,
+          //           children: [
+          //             IconButton(
+          //               onPressed: () {},
+          //               icon: Icon(Icons.menu, color: Colors.white),
+          //             ),
+          //             Text(
+          //               "Let's Ride",
+          //               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          //             ),
+          //             CircleAvatar(radius: 12, backgroundColor: Colors.grey),
+          //           ],
+          //         ),
+          //         CardWidget(),
+          //         Container(width: double.infinity, color: Colors.grey),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
