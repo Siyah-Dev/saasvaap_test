@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test1/features/home/presentation/screens/home_screen.dart';
@@ -9,8 +10,12 @@ class LandingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(landingControllerProvider, (previous, next) {
-      if(next.error !=null){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(next.error!)));
+      if (next.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.error!, style: TextStyle(color: Colors.white)),
+          ),
+        );
       }
     });
     return Scaffold(
@@ -36,10 +41,7 @@ class LandingScreen extends ConsumerWidget {
               Container(color: Colors.black87),
               ClipPath(
                 clipper: DiagonalClipper(bottomLeft: 0, bottomRight: 130),
-                child: Container(
-                  height: 250,
-                  color: Colors.amber,
-                ),
+                child: Container(height: 250, color: Colors.amber),
               ),
               Positioned(
                 top: 80,
@@ -47,13 +49,7 @@ class LandingScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text(
-                      "Welcome",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text("Welcome", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                     Text("At your service"),
                   ],
                 ),
@@ -62,14 +58,9 @@ class LandingScreen extends ConsumerWidget {
           ),
           Stack(
             children: [
-              
               ClipPath(
                 clipper: DiagonalClipper(topLeft: 120, topRight: 0),
-                child: Container(
-                  height: 300,
-                  color: Colors.black,
-                  
-                ),
+                child: Container(height: 300, color: Colors.black),
               ),
             ],
           ),
@@ -85,12 +76,7 @@ class DiagonalClipper extends CustomClipper<Path> {
   final double bottomLeft;
   final double bottomRight;
 
-  DiagonalClipper({
-    this.topLeft = 0,
-    this.topRight = 0,
-    this.bottomLeft = 0,
-    this.bottomRight = 0,
-  });
+  DiagonalClipper({this.topLeft = 0, this.topRight = 0, this.bottomLeft = 0, this.bottomRight = 0});
 
   @override
   Path getClip(Size size) {
