@@ -14,6 +14,7 @@ class LandingScreen extends ConsumerWidget {
       }
     });
     return Scaffold(
+      backgroundColor: Colors.grey,
       floatingActionButton: InkWell(
         onTap: () async {
           final isSuccess = await ref.read(landingControllerProvider.notifier).getToken();
@@ -28,45 +29,95 @@ class LandingScreen extends ConsumerWidget {
         ),
       ),
       body: Column(
+        mainAxisAlignment: .spaceBetween,
         children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              width: double.infinity,
-              decoration: BoxDecoration(color: Colors.amber),
-              child: Column(
-                mainAxisAlignment: .center,
-                crossAxisAlignment: .start,
-                spacing: 5,
-                children: [
-                  Text("Welcome", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                  Text("At your servers"),
-                ],
+          Stack(
+            children: [
+              Container(color: Colors.black87),
+              ClipPath(
+                clipper: DiagonalClipper(bottomLeft: 0, bottomRight: 130),
+                child: Container(
+                  height: 250,
+                  color: Colors.amber,
+                ),
               ),
-            ),
+              Positioned(
+                top: 80,
+                left: 20,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Welcome",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text("At your service"),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                // image: DecorationImage(image: NetworkImage('https://pxhere.com/en/photo/239853')),
-                color: Colors.grey,
+          Stack(
+            children: [
+              
+              ClipPath(
+                clipper: DiagonalClipper(topLeft: 120, topRight: 0),
+                child: Container(
+                  height: 300,
+                  color: Colors.black,
+                  
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              width: double.infinity,
-              color: Colors.black,
-              child: Text(
-                'we are here to make your trip memorable',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ),
+            ],
           ),
         ],
       ),
     );
+  }
+}
+
+class DiagonalClipper extends CustomClipper<Path> {
+  final double topLeft;
+  final double topRight;
+  final double bottomLeft;
+  final double bottomRight;
+
+  DiagonalClipper({
+    this.topLeft = 0,
+    this.topRight = 0,
+    this.bottomLeft = 0,
+    this.bottomRight = 0,
+  });
+
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+
+    // Start from top-left
+    path.moveTo(0, topLeft);
+
+    // Top-right
+    path.lineTo(size.width, topRight);
+
+    // Bottom-right
+    path.lineTo(size.width, size.height - bottomRight);
+
+    // Bottom-left
+    path.lineTo(0, size.height - bottomLeft);
+
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant DiagonalClipper oldClipper) {
+    return topLeft != oldClipper.topLeft ||
+        topRight != oldClipper.topRight ||
+        bottomLeft != oldClipper.bottomLeft ||
+        bottomRight != oldClipper.bottomRight;
   }
 }
