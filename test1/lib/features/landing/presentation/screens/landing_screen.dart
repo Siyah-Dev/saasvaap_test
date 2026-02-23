@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test1/features/home/presentation/screens/home_screen.dart';
@@ -62,6 +61,26 @@ class LandingScreen extends ConsumerWidget {
                 clipper: DiagonalClipper(topLeft: 120, topRight: 0),
                 child: Container(height: 300, color: Colors.black),
               ),
+              Positioned(
+               
+                left: 40,
+                child: Transform.rotate(
+                  angle: -0.3,
+                  child: Image.asset('assets/images/car.png'),
+                ),
+              ),
+              Positioned(
+                top: 140,
+                left: 20,
+                child: SizedBox(
+                  width: 300,
+                  child: Text(
+                    "we are here to make your trip memorable",
+                    softWrap: true,
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ),
+              ),
             ],
           ),
         ],
@@ -82,18 +101,10 @@ class DiagonalClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
 
-    // Start from top-left
     path.moveTo(0, topLeft);
-
-    // Top-right
     path.lineTo(size.width, topRight);
-
-    // Bottom-right
     path.lineTo(size.width, size.height - bottomRight);
-
-    // Bottom-left
     path.lineTo(0, size.height - bottomLeft);
-
     path.close();
 
     return path;

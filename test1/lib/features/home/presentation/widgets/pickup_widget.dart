@@ -28,7 +28,7 @@ class PickUpWidget extends StatelessWidget {
             
             crossAxisAlignment: .start,
             children: [
-              Text(subTitle, style: TextStyle(color: Colors.grey)),
+              Text(subTitle, style: TextStyle(color: Colors.grey,fontSize: 10)),
               Text(
                 title,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
